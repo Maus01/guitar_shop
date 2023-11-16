@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}History{% endblock title %}
+
+
+
+
+{% block content %}
+  <!--================Cart Area =================-->
+  <section class="cart_area padding_top">
+    <div class="container">
+      <div class="cart_inner">
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Date</th>
+                <th scope="col">Price</th>
+                <th scope="col">No. of items</th>
+              </tr>
+            </thead>
+            <tbody id="cart-summary">
+              
+              {% for order in orders %}
+            
+              <tr class="cart-item{{item.product.product_code}}">
+                
+                <td>
+                  <a href="{{order.get_absolute_url}}">
+                  <div class="media">
+                    <div class="media-body">
+                      <p>{{ order.created }}</p>
+                    </div>
+                  </div>
+                </a>
+                </td>
+              
+                <td>
+                  <div>
+                    CZK<h5>{{ order.order_price }}</h5>
+                  </div>
+                </td>
+                <td>
+                  <div class="product_count">
+                   {{order.no_of_items}}
+                  </div>
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+  </section>
+  <!--================End Cart Area =================-->
+
+
+  {% endblock content %}

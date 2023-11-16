@@ -1,0 +1,172 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Category{% endblock title %}
+
+
+{% block content %}
+
+
+
+
+<!--Plugin CSS file with desired skin-->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.1/css/ion.rangeSlider.min.css"/>
+
+<!--jQuery-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<!--Plugin JavaScript file-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.1/js/ion.rangeSlider.min.js"></script>   
+    
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>aranoz</title>
+    <link rel="icon" href="{% static 'img/favicon.png' %}">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <!-- animate CSS -->
+    <link rel="stylesheet" href="{% static 'css/animate.css' %}">
+    <!-- owl carousel CSS -->
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css'%}">
+    <!-- nice select CSS -->
+    <link rel="stylesheet" href="{% static 'css/nice-select.css' %}">
+    <!-- font awesome CSS -->
+    <link rel="stylesheet" href="{% static 'css/all.css' %}">
+    <!-- flaticon CSS -->
+    <link rel="stylesheet" href="{% static 'css/flaticon.css' %}">
+    <link rel="stylesheet" href="{% static 'css/themify-icons.css' %}">
+    <!-- font awesome CSS -->
+    <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
+    <!-- swiper CSS -->
+    <link rel="stylesheet" href="{% static 'css/slick.css' %}">
+    <link rel="stylesheet" href="{% static 'css/price_rangs.css' %}">
+    <!-- style CSS -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+
+
+   
+
+    <!--================Home Banner Area =================-->
+    <!-- breadcrumb start-->
+    <style>
+        .breadcrumb_bg{background-image:url('{{category.image_banner.url}}');
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;}
+    </style>
+    <section class="breadcrumb breadcrumb_bg">
+      
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="breadcrumb_iner">
+                        <div class="breadcrumb_iner_item">
+                            <h2>Shop {{category.name}}</h2>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- breadcrumb start-->
+
+    <!--================Category Product Area =================-->
+    <section class="cat_product_area section_padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="left_sidebar_area">
+                        
+
+                       
+
+                        
+
+                        
+                    </div>
+                </div>
+                <div class="col-lg-9">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="product_top_bar d-flex justify-content-between align-items-center">
+                                <div class="single_product_menu">
+                                    
+                                </div>
+                               
+                                <div class="single_product_menu d-flex">
+                                   
+                                </div>
+                                <div class="single_product_menu d-flex">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row align-items-center latest_product_inner">
+                        {% for product in products %}
+                        
+                        <div class="col-lg-4 col-sm-6">
+                           
+                            <div class="single_product_item">
+                                <img src="{{product.image.url}}" alt="" style="height:350px;">
+                                <div class="single_product_text">
+                                    <h4>{{product.brand}}  {{product.name}}</h4>
+                                    <h3><div value="{{product.price}}" class="product-price" id="product-price{{product.product_code}}" data-index="{{product.product_code}}">{{product.price}}</div> CZK</h3>
+                                    <a href="{{ product.get_absolute_url }}" class="add_cart">Detail</a>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        {% endfor %}
+                       
+                       
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--================End Category Product Area =================-->
+
+   
+
+   
+
+    <!-- jquery plugins here-->
+    <script src="{% static 'js/jquery-1.12.1.min.js' %}"></script>
+    <!-- popper js -->
+    <script src="{% static 'js/popper.min.js' %}"></script>
+    <!-- bootstrap js -->
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <!-- easing js -->
+    <script src="{% static 'js/jquery.magnific-popup.js' %}"></script>
+    <!-- swiper js -->
+    <script src="{% static 'js/swiper.min.js' %}"></script>
+    <!-- swiper js -->
+    <script src="{% static 'js/masonry.pkgd.js' %}"></script>
+    <!-- particles js -->
+    <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'js/jquery.nice-select.min.js' %}"></script>
+    <!-- slick js -->
+    <script src="{% static 'js/slick.min.js' %}"></script>
+    <script src="{% static 'js/jquery.counterup.min.js' %}"></script>
+    <script src="{% static 'js/waypoints.min.js' %}"></script>
+    <script src="{% static 'js/contact.js' %}"></script>
+    <script src="{% static 'js/jquery.ajaxchimp.min.js' %}"></script>
+    <script src="{% static 'js/jquery.form.js' %}"></script>
+    <script src="{% static 'js/jquery.validate.min.js' %}"></script>
+    <script src="{% static 'js/mail-script.js' %}"></script>
+    <script src="{% static 'js/stellar.js' %}"></script>
+    <script src="{% static 'js/price_rangs.js' %}"></script>
+    <!-- custom js -->
+    <script src="{% static 'js/custom.js' %}"></script>
+ 
+
+    {% endblock content %}
+
+

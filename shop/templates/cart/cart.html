@@ -1,0 +1,166 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Cart{% endblock title %}
+
+
+
+
+{% block content %}
+  
+
+  <style>
+    .img-cart{
+      height:100px;
+    }
+
+    .delete-button{
+      border:none;
+      background-color:white;
+    }
+
+  
+
+  </style> 
+
+  <!--================Cart Area =================-->
+  <section class="cart_area padding_top">
+    <div class="container">
+      <div class="cart_inner">
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Product</th>
+                <th scope="col">Price</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Total</th>
+              </tr>
+            </thead>
+            <tbody id="cart-summary">
+              
+              {% for item in cart %}
+              
+              <tr class="cart-item{{item.product.product_code}}">
+                <td>
+                  <div class="media">
+                    <div class="d-flex">
+                      <img src="{{ item.product.image.url }}" alt="" class="img-cart" />
+                    </div>
+                    <div class="media-body">
+                      <p>{{ item.product.name }}</p>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <div>
+                    CZK<h5>{{ item.product.price }}</h5>
+                  </div>
+                </td>
+                <td>
+                  <div class="product_count">
+                   
+                   
+                    <input class="input-number" id="qty{{item.product.product_code}}" data-index="{{item.product.product_code}}" type="text" value="{{ item.quantity }}" min="0" max="10">
+                   
+                  </div>
+                </td>
+                <td>
+                  CZK<h5 id="item-total{{item.product.product_code}}">{{ item.item_sum_price }}</h5>
+                </td>
+                <td>
+                  <button id="delete-button" class="delete-button" type="button" data-index="{{item.product.product_code}}">
+                    <i class="fa fa-trash" aria-hidden="true"></i>
+                  </button>
+                </td>
+              </tr>
+              
+              
+              {% endfor %}
+              
+              <tr class="bottom_button">
+               
+               
+              </tr>
+              <tr>
+                <td></td>
+                <td></td>
+                <td>
+                  <h5>Subtotal</h5>
+                </td>
+                <td style="display:block;">
+                  <h5>CZK<div id="subtotal">{{ subtotal }}</div></h5>
+                </td>
+              
+              </tr>
+             
+            </tbody>
+          </table>
+          <div class="checkout_btn_inner float-right">
+            <a class="btn_1" href="{% url 'core:index' %}">Continue Shopping</a>
+            <a class="btn_1 checkout_btn_1" href="{% url 'core:checkout' %}">Proceed to checkout</a>
+          </div>
+        </div>
+      </div>
+  </section>
+  <!--================End Cart Area =================-->
+
+ 
+
+
+  <script>
+    
+      $(document).on('change', '.input-number', function () {
+        var prodcode = $(this).data('index');
+        $.ajax({
+          type: 'POST',
+          url: '{% url "cart:cart_update" %}',
+          data: {
+            productcode: $(this).data('index'),
+            productqty: $('#qty'+ prodcode).val(),
+            csrfmiddlewaretoken: "{{csrf_token}}",
+            action: 'post'
+          
+          },
+          success: function (json) {
+            
+            document.getElementById("subtotal").innerHTML = json.subtotal,
+            document.getElementById("item-total" + prodcode).innerHTML = json.item_total,
+            document.getElementById("cart-products").innerHTML = json.no_of_products
+          },
+          error: function (xhr, errmsg, err) {}
+          
+        });
+      })
+
+      $(document).on('click', '.delete-button', function (e) {
+        e.preventDefault();
+        var prodcode = $(this).data('index');
+        $.ajax({
+          type: 'POST',
+          url: '{% url "cart:cart_delete" %}',
+          data: {
+            productcode: $(this).data('index'),
+            csrfmiddlewaretoken: "{{csrf_token}}",
+            action: 'post'
+          
+          },
+          success: function (json) {
+            console.log(prodcode)
+            $('.cart-item' + prodcode).remove();
+            document.getElementById("subtotal").innerHTML = json.subtotal,
+            document.getElementById("cart-products").innerHTML = json.no_of_products
+          },
+          error: function (xhr, errmsg, err) {}
+          
+        });
+      })
+    
+  
+  
+  </script>
+
+
+ 
+ 
+
+  {% endblock content %}

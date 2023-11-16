@@ -1,0 +1,16 @@
+wheel==0.41.2
+asgiref==3.7.2
+Django>=3.2.3,<3.3
+django-appconf==1.0.5
+django-compressor==4.4
+psycopg2-binary==2.9.9
+rcssmin==1.1.1
+rjsmin==1.2.1
+sqlparse==0.4.4
+typing_extensions==4.8.0
+Pillow==10.1.0
+django-libsass==0.9
+libsass==0.22.0
+uWSGI>=2.0.19.1,<2.1
+
+
